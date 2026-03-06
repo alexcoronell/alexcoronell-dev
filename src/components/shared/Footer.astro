@@ -1,3 +1,11 @@
+---
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <footer>
-    <p>Footer</p>
+  <p>{t("footer")}</p>
 </footer>

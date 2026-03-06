@@ -1,3 +1,5 @@
+import { personalData } from "@data/index";
+
 export const languages = {
   es: "Spanish",
   en: "English",
@@ -38,11 +40,13 @@ export const ui = {
     resumeName: "Alexander-Coronell-Hoja-de-Vida.pdf",
     resumeShortName: "Hoja de Vida",
     resumeAriaLabel: "Descargar mi Hoja de Vida",
+    footer: `© ${new Date().getFullYear()} - Desarrollado por ${personalData.shortName}.`,
   },
   en: {
     nav: uiMenu.en,
     resumeName: "Alexander-Coronell-CV-Resume.pdf",
     resumeShortName: "Resume",
     resumeAriaLabel: "Download my Resume",
+    footer: `© ${new Date().getFullYear()} - Built by ${personalData.shortName}.`,
   },
 };
