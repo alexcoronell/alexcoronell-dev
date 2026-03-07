@@ -1,3 +1,14 @@
+---
+import { personalData } from "@data/index";
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <section>
-    <h1>Hero</h1>
+  <h4>{t("hero.subtitle")}</h4>
+  <h1>{personalData.shortName}</h1>
+  <p>{t("hero.description")}</p>
 </section>

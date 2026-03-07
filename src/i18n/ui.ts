@@ -37,6 +37,11 @@ export const uiMenu = {
 export const ui = {
   es: {
     nav: uiMenu.es,
+    hero: {
+      subtitle: "Hola, mi nombre es",
+      description:
+        "Desarrollador Full Stack con enfoque en frontend y más de 5 años de experiencia desarrollando aplicaciones web escalables y de alto rendimiento con Angular, Astro, React, Svelte y Next.js, complementado con experiencia en backend utilizando Node.js y NestJS.",
+    },
     resumeName: "Alexander-Coronell-Hoja-de-Vida.pdf",
     resumeShortName: "Hoja de Vida",
     resumeAriaLabel: "Descargar mi Hoja de Vida",
@@ -44,6 +49,11 @@ export const ui = {
   },
   en: {
     nav: uiMenu.en,
+    hero: {
+      subtitle: "Hi, my name is",
+      description:
+        "Frontend-focused Full Stack Developer with 5+ years building scalable, high-performance web applications using Angular, Astro, React, Svelte, and Next.js, with backend expertise in Node.js and NestJS.",
+    },
     resumeName: "Alexander-Coronell-CV-Resume.pdf",
     resumeShortName: "Resume",
     resumeAriaLabel: "Download my Resume",
