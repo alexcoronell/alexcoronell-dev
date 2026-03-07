@@ -10,7 +10,6 @@ import { getLangFromUrl, useTranslations } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const sizeIcon = "";
 ---
 
 <div class="Menu">
@@ -34,13 +33,13 @@ const sizeIcon = "";
           return (
             <li>
               <a
-                class="MainMenuItem"
+                class="Menu__item"
                 href={"#" + sectionId}
                 data-scroll-to={sectionId}
                 aria-label={`Go to ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} section`}
               >
-                <span class="index">0{index + 1}.</span>
-                <span class="name transitionAc">
+                <span class="Menu__itemIndex">0{index + 1}.</span>
+                <span class="Menu__itemName">
                   {(value as string).charAt(0).toUpperCase() +
                     (value as string).slice(1)}
                 </span>
@@ -56,6 +55,16 @@ const sizeIcon = "";
         })
       }
     </ul>
+    <div class="Nav__resume">
+      <a
+        href={`/assets/resume/${t("resumeName")}`}
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t("resumeShortName")}
+      </a>
+    </div>
     <div class="Nav__flags">
       {
         lang === "es" ? (
@@ -80,7 +89,7 @@ const sizeIcon = "";
   }
 
   .Menu__overlay {
-    @apply absolute inset-0 h-screen opacity-0 translate-x-full bg-(--primary)/20;
+    @apply absolute inset-0 h-screen opacity-0 translate-x-full bg-(--primary)/20 xl:hidden;
     backdrop-filter: blur(4px);
   }
 
@@ -90,11 +99,28 @@ const sizeIcon = "";
   }
 
   #menu-nav {
-    @apply absolute p-4 w-4/5 right-0 top-0 bottom-0 left-auto min-h-screen max-h-screen bg-(--dark-surface) border-l border-(--primary) translate-x-full;
+    @apply absolute p-4 w-4/5 right-0 top-0 bottom-0 left-auto max-xl:min-h-screen max-xl:max-h-screen bg-(--dark-surface) border-l border-(--primary) max-xl:translate-x-full flex flex-col gap-y-4
+    xl:static xl:border-0 xl:w-auto xl:flex-row xl:items-center xl:justify-end xl:gap-9 xl:h-auto xl:py-0 xl:px-0 xl:bg-transparent 2xl:px-16;
   }
 
   #menu-nav ul {
-    @apply flex flex-col items-center gap-4 py-12;
+    @apply flex flex-col items-center gap-4 py-12 xl:flex-row xl:gap-8 xl:py-0;
+  }
+
+  .Menu__item {
+    font-family: "Orbitron Variable", sans-serif;
+    @apply flex flex-col items-center gap-0 xl:flex-row xl:gap-1;
+  }
+
+  .Menu__itemIndex {
+    @apply text-(--primary) text-sm mb-0 2xl:text-lg;
+  }
+  .Menu__itemName {
+    @apply text-lg xl:text-base 2xl:text-xl;
+  }
+
+  .Nav__resume {
+    @apply pb-4 flex items-center justify-center xl:pb-0 text-nowrap;
   }
 
   .Nav__flags {
@@ -111,5 +137,9 @@ const sizeIcon = "";
 
   #menu-toggle:checked ~ .Menu__overlay {
     @apply opacity-100 translate-x-0;
+  }
+
+  .Menu label {
+    @apply xl:hidden;
   }
 </style>

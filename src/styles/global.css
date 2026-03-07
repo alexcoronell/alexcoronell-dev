@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Supports weights 400-900 */
+@import "@fontsource-variable/orbitron";
+
+@import "@fontsource/rajdhani";
+
+@import "@fontsource/cutive-mono";
+
 :root {
   --primary: #00f7ff;
   --primary-dim: #00a8b3;
@@ -18,13 +25,26 @@
 
 html {
   @apply scroll-smooth;
+  font-family: "Rajdhani", sans-serif;
 }
 
 body {
-  @apply bg-(--dark-bg) text-(--primary-text) overflow-x-hidden leading-[1.6];
+  @apply bg-(--dark-bg) text-(--primary-text) overflow-x-hidden leading-[1.6] w-screen;
 }
 
 a,
 button {
   @apply cursor-pointer;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-xs border font-bold;
+}
+
+.btn-primary {
+  @apply border-(--primary)/50 text-(--primary)/75 hover:border-(--primary) hover:bg-(--primary)/50 hover:text-(--dark-bg)/90 hover:shadow-2xl hover:shadow-(--primary)/50;
+}
+
+.btn-secondary {
+  @apply border-(--secondary)/50 text-(--secondary)/75 hover:border-(--secondary) hover:bg-(--secondary)/50 hover:text-(--primary-text)/90 hover:shadow-2xl hover:shadow-(--secondary)/50;
 }
