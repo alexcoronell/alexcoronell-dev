@@ -5,10 +5,121 @@ import { getLangFromUrl, useTranslations } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// Get correct section ID based on language
+const worksSectionId = lang === "es" ? "portafolio" : "works";
 ---
 
-<section>
-  <h4>{t("hero.subtitle")}</h4>
-  <h1>{personalData.shortName}</h1>
-  <p>{t("hero.description")}</p>
+<section class="hero">
+  <div class="hero__bg">
+    <div class="city-layer city-far"></div>
+    <div class="city-layer city-mid"></div>
+    <div class="city-layer city-near"></div>
+  </div>
+  <div class="hero__glow hero__glow--cyan"></div>
+  <div class="hero__glow hero__glow--magenta"></div>
+  <div class="hero__content">
+    <h4 class="hero__subtitle">{t("hero.subtitle")}</h4>
+    <h1 class="hero__title">{personalData.shortName}</h1>
+    <p class="hero__description">{t("hero.description")}</p>
+    <a href={`#${worksSectionId}`} class="btn btn-primary">{t("hero.cta")}</a>
+  </div>
 </section>
+
+<style>
+  @reference "tailwindcss";
+
+  .hero {
+    @apply relative h-screen min-h-screen max-h-screen flex flex-col justify-center items-center overflow-hidden max-xl:mt-[-80px] border;
+  }
+
+  .hero__bg {
+    @apply absolute top-0 left-0 w-full h-full z-0 pointer-events-none;
+  }
+
+  .hero__bg .city-layer {
+    @apply absolute bottom-0 left-0 w-[200%] h-full bg-contain bg-repeat-x bg-bottom;
+  }
+
+  .city-far {
+    background: linear-gradient(
+      to top,
+      transparent 0%,
+      rgba(0, 20, 40, 0.3) 20%,
+      transparent 40%
+    );
+    opacity: 0.5;
+    animation: cityMove 120s linear infinite;
+  }
+
+  .city-mid {
+    background: linear-gradient(
+      to top,
+      transparent 0%,
+      rgba(0, 40, 60, 0.5) 30%,
+      transparent 50%
+    );
+    opacity: 0.7;
+    animation: cityMove 80s linear infinite reverse;
+  }
+
+  .city-near {
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 10, 1) 0%,
+      rgba(10, 15, 25, 0.9) 15%,
+      transparent 35%
+    );
+  }
+
+  .hero__glow {
+    @apply absolute w-[300px] h-[300px] rounded-[50%] blur-[150px] opacity-30 z-1 md:w-[450px] md:h-[450px] xl:w-[600px] xl:h-[600px] 2xl:w-[700px] 2xl:h-[700px] pointer-events-none;
+  }
+
+  .hero__glow--cyan {
+    @apply bg-(--primary) top-[10%] left-[10%];
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  .hero__glow--magenta {
+    @apply bg-(--secondary) top-[20%] left-[40%];
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  .hero__content {
+    @apply px-3 flex flex-col items-start gap-y-0 text-left w-full max-w-[800px] mx-auto 2xl:max-w-[1200px];
+  }
+
+  .hero__subtitle {
+    @apply text-(--secondary) text-xl font-bold sm:text-2xl xl:text-3xl 2xl:text-4xl;
+  }
+
+  .hero__title {
+    @apply text-(--primary) mb-6;
+  }
+
+  .hero__description {
+    @apply text-lg mb-6 sm:text-xl xl:text-2xl 2xl:text-3xl;
+  }
+
+  @keyframes cityMove {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes glowPulse {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.1);
+    }
+  }
+</style>

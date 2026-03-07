@@ -29,12 +29,26 @@ html {
 }
 
 body {
-  @apply bg-(--dark-bg) text-(--primary-text) overflow-x-hidden leading-[1.6] w-screen;
+  @apply relative bg-(--dark-bg) text-(--primary-text) overflow-x-hidden leading-[1.6] w-screen max-w-screen;
 }
 
 a,
 button {
   @apply cursor-pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-6xl sm:text-7xl 2xl:text-8xl;
+  font-family: "Orbitron Variable", sans-serif;
 }
 
 .btn {

@@ -27,9 +27,7 @@ const t = useTranslations(lang);
     <ul>
       {
         Object.entries(t("nav")).map(([key, value], index) => {
-          const sectionId =
-            key.replace("nav.", "").charAt(0).toUpperCase() +
-            key.replace("nav.", "").slice(1);
+          const sectionId = value;
           return (
             <li>
               <a
@@ -85,7 +83,7 @@ const t = useTranslations(lang);
   @reference "tailwindcss";
 
   .Menu {
-    @apply relative w-full p-4 flex items-center justify-end;
+    @apply z-9999999999 relative w-full max-w-screen p-4 flex items-center justify-end xl:absolute;
   }
 
   .Menu__overlay {

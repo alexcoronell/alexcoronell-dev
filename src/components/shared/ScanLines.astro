@@ -1,0 +1,25 @@
+<div class="scan-lines"></div>
+
+<style>
+  @reference "tailwindcss";
+  .scan-lines {
+    @apply fixed top-0 left-0 w-full h-full pointer-events-none z-9998;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    animation: scanMove 8s linear infinite;
+  }
+
+  @keyframes scanMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100px;
+    }
+  }
+</style>
