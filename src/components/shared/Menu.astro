@@ -10,56 +10,106 @@ import { getLangFromUrl, useTranslations } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const sizeIcon = "";
 ---
 
-<nav class="Nav">
+<div class="Menu">
   <label for="menu-toggle">
-    <MenuIcon />
-    <CloseIcon />
+    <MenuIcon class="MenuIcon" />
   </label>
-  <input type="checkbox" id="menu-toggle" />
-  <ul>
-    {
-      Object.entries(t("nav")).map(([key, value], index) => {
-        const sectionId =
-          key.replace("nav.", "").charAt(0).toUpperCase() +
-          key.replace("nav.", "").slice(1);
-        return (
-          <li>
-            <a
-              class="MainMenuItem"
-              href={"#" + sectionId}
-              data-scroll-to={sectionId}
-              aria-label={`Go to ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} section`}
-            >
-              <span class="index">0{index + 1}.</span>
-              <span class="name transitionAc">
-                {(value as string).charAt(0).toUpperCase() +
-                  (value as string).slice(1)}
-              </span>
-              <span class="sr-only">
-                Go to{" "}
-                {(value as string).charAt(0).toUpperCase() +
-                  (value as string).slice(1)}{" "}
-                section
-              </span>
-            </a>
-          </li>
-        );
-      })
-    }
-  </ul>
-  <div class="Nav__flags">
-    {
-      lang === "es" ? (
-        <a href="/en">
-          <UsaFlagIcon />
-        </a>
-      ) : (
-        <a href="/">
-          <SpainFlagIcon />
-        </a>
-      )
-    }
-  </div>
-</nav>
+  <input type="checkbox" id="menu-toggle" class="hidden" />
+  <div class="Menu__overlay"></div>
+  <nav class="Menu__nav" id="menu-nav">
+    <div class="flex justify-end">
+      <label for="menu-toggle">
+        <CloseIcon class="CloseIcon" />
+      </label>
+    </div>
+    <ul>
+      {
+        Object.entries(t("nav")).map(([key, value], index) => {
+          const sectionId =
+            key.replace("nav.", "").charAt(0).toUpperCase() +
+            key.replace("nav.", "").slice(1);
+          return (
+            <li>
+              <a
+                class="MainMenuItem"
+                href={"#" + sectionId}
+                data-scroll-to={sectionId}
+                aria-label={`Go to ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} section`}
+              >
+                <span class="index">0{index + 1}.</span>
+                <span class="name transitionAc">
+                  {(value as string).charAt(0).toUpperCase() +
+                    (value as string).slice(1)}
+                </span>
+                <span class="sr-only">
+                  Go to{" "}
+                  {(value as string).charAt(0).toUpperCase() +
+                    (value as string).slice(1)}{" "}
+                  section
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <div class="Nav__flags">
+      {
+        lang === "es" ? (
+          <a href="/en">
+            <UsaFlagIcon class="FlagIcon" />
+          </a>
+        ) : (
+          <a href="/">
+            <SpainFlagIcon class="FlagIcon" />
+          </a>
+        )
+      }
+    </div>
+  </nav>
+</div>
+
+<style>
+  @reference "tailwindcss";
+
+  .Menu {
+    @apply relative w-full p-4 flex items-center justify-end;
+  }
+
+  .Menu__overlay {
+    @apply absolute inset-0 h-screen opacity-0 translate-x-full bg-(--primary)/20;
+    backdrop-filter: blur(4px);
+  }
+
+  .MenuIcon,
+  .CloseIcon {
+    @apply w-12 h-12 text-(--primary);
+  }
+
+  #menu-nav {
+    @apply absolute p-4 w-4/5 right-0 top-0 bottom-0 left-auto min-h-screen max-h-screen bg-(--dark-surface) border-l border-(--primary) translate-x-full;
+  }
+
+  #menu-nav ul {
+    @apply flex flex-col items-center gap-4 py-12;
+  }
+
+  .Nav__flags {
+    @apply flex justify-center;
+  }
+
+  .FlagIcon {
+    @apply w-8 h-8;
+  }
+
+  #menu-toggle:checked ~ #menu-nav {
+    @apply translate-x-0;
+  }
+
+  #menu-toggle:checked ~ .Menu__overlay {
+    @apply opacity-100 translate-x-0;
+  }
+</style>

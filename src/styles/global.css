@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-  --color-cyan: #00f7ff;
-  --color-cyan-dim: #00a8b3;
-  --color-magenta: #ff0066;
-  --color-magenta-dim: #b30047;
-  --color-orange: #ff6a00;
-  --color-dark-bg: #050508;
-  --color-dark-surface: #0a0a10;
-  --color-primary: #e8e8f0;
-  --color-secondary: #8a8a9a;
+:root {
+  --primary: #00f7ff;
+  --primary-dim: #00a8b3;
+  --secondary: #ff0066;
+  --secondary-dim: #b30047;
+  --orange: #ff6a00;
+  --dark-bg: #050508;
+  --dark-surface: #0a0a10;
+  --primary-text: #e8e8f0;
+  --secondary-text: #8a8a9a;
 }
 
 * {
-  @apply box-border m-0 p-0;
+  @apply box-border m-0 p-0 transition-all duration-500 ease-linear;
 }
 
 html {
@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  @apply bg-dark-bg text-primary overflow-x-hidden leading-[1.6];
+  @apply bg-(--dark-bg) text-(--primary-text) overflow-x-hidden leading-[1.6];
 }
 
 a,
