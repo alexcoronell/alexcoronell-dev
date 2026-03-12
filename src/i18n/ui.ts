@@ -1,4 +1,4 @@
-import { personalData } from "@data/index";
+import { personalData, acercaDeMi, aboutMe } from "@data/index";
 
 export const languages = {
   es: "Spanish",
@@ -43,6 +43,10 @@ export const ui = {
         "Desarrollador Full Stack con enfoque en frontend y más de 5 años de experiencia desarrollando aplicaciones web escalables y de alto rendimiento con Angular, Astro, React, Svelte y Next.js, complementado con experiencia en backend utilizando Node.js y NestJS.",
       cta: "Ver mi trabajo",
     },
+    about: {
+      title: acercaDeMi.title,
+      content: acercaDeMi.content,
+    },
     resumeName: "Alexander-Coronell-Hoja-de-Vida.pdf",
     resumeShortName: "Hoja de Vida",
     resumeAriaLabel: "Descargar mi Hoja de Vida",
@@ -55,6 +59,10 @@ export const ui = {
       description:
         "Frontend-focused Full Stack Developer with 5+ years building scalable, high-performance web applications using Angular, Astro, React, Svelte, and Next.js, with backend expertise in Node.js and NestJS.",
       cta: "Know my work",
+    },
+    about: {
+      title: aboutMe.title,
+      content: aboutMe.content,
     },
     resumeName: "Alexander-Coronell-CV-Resume.pdf",
     resumeShortName: "Resume",

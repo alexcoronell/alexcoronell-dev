@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string;
+  index: number;
+  isMain?: boolean;
+}
+
+const { title, index, isMain = false } = Astro.props;
+---
+
+{
+  isMain ? (
+    <main class="Section">
+      <div class="Section__titleArea">
+        <h4 class="Section__index">
+          {index < 10 ? "0" : ""}
+          {index}.{" "}
+        </h4>
+        <h2 class="Section__title">{title}</h2>
+      </div>
+      <slot />
+    </main>
+  ) : (
+    <section class="Section">
+      <div class="Section__titleArea">
+        <h4 class="Section__index">
+          {index < 10 ? "0" : ""}
+          {index}.{" "}
+        </h4>
+        <h2 class="Section__title">{title}</h2>
+      </div>
+      <slot />
+    </section>
+  )
+}
+
+<style>
+  @reference "tailwindcss";
+
+  .Section {
+    @apply w-full max-w-[1200px] mx-auto px-3 py-6 md:px-6 md:py-9 xl:px-0;
+  }
+
+  .Section__titleArea {
+    @apply relative flex items-center justify-center gap-2 mb-12 md:justify-start;
+  }
+
+  .Section__titleArea::after {
+    @apply content-[''] absolute -bottom-2 left-[50%] translate-x-[-50%] w-full h-[2px];
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary),
+      var(--secondary),
+      transparent
+    );
+  }
+
+  .Section__index,
+  .Section__title {
+    @apply inline;
+  }
+
+  .Section__index {
+    @apply text-(--primary);
+  }
+
+  .Section__title {
+    @apply text-(--secondary);
+  }
+</style>
