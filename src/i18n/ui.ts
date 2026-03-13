@@ -19,7 +19,6 @@ export const uiMenu = {
   es: {
     "nav.about": "acerca",
     "nav.skills": "skills",
-    "nav.learning": "aprendiendo",
     "nav.works": "portafolio",
     "nav.experiences": "experiencia",
     "nav.contact": "contacto",
@@ -28,7 +27,6 @@ export const uiMenu = {
     "nav.about": "about",
     "nav.skills": "skills",
     "nav.learning": "learning",
-    "nav.works": "works",
     "nav.experiences": "experiences",
     "nav.contact": "contact",
   },
