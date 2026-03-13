@@ -1,3 +1,137 @@
-<main>
-    <h2>Skills</h2>
-</main>
+---
+/* Components */
+import Section from "../shared/Section.astro";
+import AngularIcon from "../ui/icons/AngularIcon.astro";
+import AstroIcon from "../ui/icons/AstroIcon.astro";
+import ReactIcon from "../ui/icons/ReactIcon.astro";
+import NodeJsIcon from "../ui/icons/NodeJsIcon.astro";
+import NestJsIcon from "../ui/icons/NestJsIcon.astro";
+import SpringIcon from "../ui/icons/SpringIcon.astro";
+import PythonIcon from "../ui/icons/PythonIcon.astro";
+import DjangoIcon from "../ui/icons/DjangoIcon.astro";
+import AwsIcon from "../ui/icons/AwsIcon.astro";
+import NextjsIcon from "../ui/icons/NextjsIcon.astro";
+import SvelteIcon from "../ui/icons/SvelteIcon.astro";
+import TailwindCssIcon from "../ui/icons/TailwindCssIcon.astro";
+import JavaIcon from "../ui/icons/JavaIcon.astro";
+import LinuxIcon from "../ui/icons/LinuxIcon.astro";
+import TypescriptIcon from "../ui/icons/TypescriptIcon.astro";
+
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section title={t("skills") as string} index={2} isMain={true}>
+  <article class="Skills">
+    <div class="Skills__laptop">
+      <div class="Skills_screen">
+        <div class="Skills_item">
+          <AngularIcon class="Skills_icon" /><span>Angular</span>
+        </div>
+        <div class="Skills_item">
+          <AstroIcon class="Skills_icon" /><span>Astro</span>
+        </div>
+        <div class="Skills_item">
+          <ReactIcon class="Skills_icon" /><span>React</span>
+        </div>
+        <div class="Skills_item">
+          <NodeJsIcon class="Skills_icon" /><span>Node.js</span>
+        </div>
+        <div class="Skills_item">
+          <NestJsIcon class="Skills_icon" /><span>NestJS</span>
+        </div>
+        <div class="Skills_item">
+          <SpringIcon class="Skills_icon" /><span>Spring</span>
+        </div>
+        <div class="Skills_item">
+          <PythonIcon class="Skills_icon" /><span>Python</span>
+        </div>
+        <div class="Skills_item">
+          <DjangoIcon class="Skills_icon" /><span>Django</span>
+        </div>
+        <div class="Skills_item">
+          <AwsIcon class="Skills_icon" /><span>AWS</span>
+        </div>
+        <div class="Skills_item">
+          <NextjsIcon class="Skills_icon" /><span>Next.js</span>
+        </div>
+        <div class="Skills_item">
+          <SvelteIcon class="Skills_icon" /><span>Svelte</span>
+        </div>
+        <div class="Skills_item">
+          <TailwindCssIcon class="Skills_icon" /><span>Tailwind</span>
+        </div>
+        <div class="Skills_item">
+          <LinuxIcon class="Skills_icon" /><span>Linux</span>
+        </div>
+        <div class="Skills_item">
+          <JavaIcon class="Skills_icon" /><span>Java</span>
+        </div>
+        <div class="Skills_item">
+          <TypescriptIcon class="Skills_icon" /><span>TypeScript</span>
+        </div>
+      </div>
+      <div class="Skills__keyboard"></div>
+    </div>
+    <ul class="Skills__list">
+      <li><h5>Angular</h5></li>
+      <li><h5>Astro</h5></li>
+      <li><h5>React</h5></li>
+      <li><h5>Node.js</h5></li>
+      <li><h5>NestJS</h5></li>
+      <li><h5>Spring</h5></li>
+      <li><h5>Python</h5></li>
+      <li><h5>Django</h5></li>
+      <li><h5>AWS</h5></li>
+      <li><h5>Next.js</h5></li>
+      <li><h5>Svelte</h5></li>
+      <li><h5>Tailwind</h5></li>
+      <li><h5>Linux</h5></li>
+      <li><h5>Java</h5></li>
+      <li><h5>Typescript</h5></li>
+    </ul>
+  </article>
+</Section>
+
+<style>
+  @reference "tailwindcss";
+  .Skills__laptop {
+    @apply flex flex-col gap-0 items-center justify-center;
+  }
+
+  .Skills_screen {
+    @apply w-[300px] h-[200px] bg-(--dark-bg) border-(--primary) border-8 rounded-sm grid grid-cols-5 items-center justify-items-center
+    md:w-[450px] md:h-[300px] md:grid-cols-3 md:justify-items-start md:py-3 md:px-6
+    lg:w-[600px] lg:h-[400px];
+  }
+
+  .Skills_item {
+    @apply md:flex md:items-center md:justify-center md:gap-2 lg:gap-4;
+  }
+
+  .Skills_icon {
+    @apply w-8 h-8 lg:w-12 lg:h-12;
+  }
+
+  .Skills_item span {
+    @apply hidden md:block text-sm font-bold text-(--primary) lg:text-base;
+    font-family: "Cutive Mono", monospace;
+  }
+
+  .Skills__keyboard {
+    @apply relative w-[340px] h-[20px] bg-(--primary) rounded-b-xl
+    md:w-[520px] md:h-[30px] lg:w-[700px] lg:h-[40px];
+  }
+
+  .Skills__keyboard::after {
+    @apply content-[''] absolute top-0 left-[50%] -translate-x-1/2 w-1/6 h-1/6 bg-(--dark-bg) rounded-lg;
+  }
+
+  .Skills__list {
+    @apply w-[340px] grid grid-cols-3 gap-2 pt-6 mx-auto list-disc pl-6 text-sm md:hidden;
+    font-family: "Cutive Mono", monospace;
+  }
+</style>
