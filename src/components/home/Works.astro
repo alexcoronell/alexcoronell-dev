@@ -1,3 +1,31 @@
-<section>
-    <h2>Works</h2>
-</section>
+---
+/* Components */
+import Section from "../shared/Section.astro";
+import WorkItem from "../shared/WorkItem.astro";
+
+/* Types */
+import type { Work } from "@interfaces/index";
+
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section title={t("works.title") as string} index={3}>
+  <div class="Works">
+    {
+      (t("workItems") as unknown as Work[]).map((work, index) => {
+        return <WorkItem work={work} index={index} />;
+      })
+    }
+  </div>
+</Section>
+
+<style>
+  @reference "tailwindcss";
+  .Works {
+    @apply grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3;
+  }
+</style>

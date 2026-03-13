@@ -1,0 +1,148 @@
+---
+import GithubIcon from "@components/ui/icons/GithubIcon.astro";
+import GitlabIcon from "@components/ui/icons/GitlabIcon.astro";
+import WwwIcon from "@components/ui/icons/wwwIcon.astro";
+import type { Work } from "@interfaces/index";
+
+interface Props {
+  work: Work;
+  index: number;
+}
+
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const {
+  work: {
+    title,
+    image,
+    status,
+    technologies,
+    description,
+    repoIsPrivate,
+    repoOrigin,
+    repo,
+    urlIsAvailable,
+    url,
+  },
+  index,
+} = Astro.props;
+console.log(index);
+---
+
+<article class="WorkItem" data-work-index={index}>
+  <img
+    src={`assets/images/works/${image}`}
+    alt={title}
+    width="500"
+    height="350"
+  />
+  <div class="WorkItem__content">
+    <h3 class="WorkItem__title">{title}</h3>
+    <p>
+      Status: {status === "active" ? t("works.active") : null}
+      {status === "inactive" ? t("works.inactive") : null}
+      {status === "inDevelopment" ? t("works.inDevelopment") : null}
+    </p>
+    <p>Technologies:</p>
+    <div class="WorkItem__technologies">
+      {
+        technologies.map((technology) => {
+          return <p class="WorkItem__technology">{technology}</p>;
+        })
+      }
+    </div>
+    <p>{description}</p>
+    <div class="WorkItem__links">
+      {
+        repoIsPrivate ? (
+          <button class="WorkItem__link btn btn-primary" disabled="true">
+            {repoOrigin === "Github" ? <GithubIcon /> : <GitlabIcon />}{" "}
+            <span>{repoOrigin}</span>
+          </button>
+        ) : (
+          <a href={repo} target="_blank" class="WorkItem__link btn btn-primary">
+            {repoOrigin === "Github" ? <GithubIcon /> : <GitlabIcon />}
+            <span>{repoOrigin}</span>
+          </a>
+        )
+      }
+      {
+        urlIsAvailable ? (
+          <a href={url} target="_blank" class="WorkItem__link btn btn-primary">
+            <WwwIcon />
+            <span>{t("works.visit")}</span>
+          </a>
+        ) : (
+          <button class="WorkItem__link btn btn-primary" disabled="true">
+            <WwwIcon />
+            <span>{t("works.visit")}</span>
+          </button>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  @reference "tailwindcss";
+  .WorkItem {
+    @apply relative border border-(--primary)/15 rounded-lg p-2 overflow-hidden transition-all duration-500 flex flex-col w-full max-w-[350px] mx-auto
+    md:max-w-[400px] lg:max-w-[450px]
+    hover:border-(--primary)/50 hover:shadow-[0_0_10px_rgba(0,247,255,0.5)];
+    background: linear-gradient(
+      135deg,
+      rgba(15, 20, 35, 0.9),
+      rgba(10, 15, 25, 0.95)
+    );
+  }
+
+  .WorkItem::before {
+    @apply content-[''] absolute inset-0 opacity-0 transition-opacity duration-500 ease-in -z-10;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 247, 255, 0.1),
+      transparent 50%,
+      rgba(255, 0, 102, 0.1)
+    );
+  }
+
+  .WorkItem:hover::before {
+    @apply opacity-100;
+  }
+
+  .WorkItem__content {
+    @apply p-4 pt-6 flex flex-col justify-between grow;
+  }
+
+  .WorkItem__title {
+    @apply text-white mb-3;
+  }
+
+  .WorkItem:hover img {
+    transform: scale(1.1);
+  }
+
+  .WorkItem:hover .WorkItem__title {
+    text-shadow: 0 0 20px var(--primary);
+  }
+
+  .WorkItem__technologies {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .WorkItem__technology {
+    @apply border border-(--secondary) text-(--primary) rounded-4xl px-2 py-1 text-sm bg-(--primary)/5;
+  }
+
+  .WorkItem__links {
+    @apply flex items-end justify-between gap-2 grow mt-auto;
+  }
+
+  .WorkItem__link {
+    @apply inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-transparent hover:text-(--primary) hover:opacity-50 hover:border-(--primary)/50;
+  }
+</style>

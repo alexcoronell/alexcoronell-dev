@@ -1,4 +1,10 @@
-import { personalData, acercaDeMi, aboutMe } from "@data/index";
+import {
+  personalData,
+  acercaDeMi,
+  aboutMe,
+  worksEs,
+  worksEn,
+} from "@data/index";
 
 export const languages = {
   es: "Spanish",
@@ -52,7 +58,9 @@ export const ui = {
       active: "Activo",
       inactive: "Inactivo",
       inDevelopment: "En Desarrollo",
+      visit: "Visitar",
     },
+    workItems: worksEs,
     resumeName: "Alexander-Coronell-Hoja-de-Vida.pdf",
     resumeShortName: "Hoja de Vida",
     resumeAriaLabel: "Descargar mi Hoja de Vida",
@@ -77,7 +85,9 @@ export const ui = {
       active: "Active",
       inactive: "Inactive",
       inDevelopment: "In Development",
+      visit: "Visit",
     },
+    workItems: worksEn,
     resumeName: "Alexander-Coronell-CV-Resume.pdf",
     resumeShortName: "Resume",
     resumeAriaLabel: "Download my Resume",

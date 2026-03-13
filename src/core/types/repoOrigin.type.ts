@@ -1,1 +1,1 @@
-export type RepoOrigin = "github" | "gitlab";
+export type RepoOrigin = "Github" | "Gitlab";
