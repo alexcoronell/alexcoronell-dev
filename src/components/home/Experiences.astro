@@ -1,3 +1,44 @@
-<section>
-    <h2>Experiences</h2>
-</section>
+---
+/* Components */
+import Section from "../shared/Section.astro";
+import ExperienceItem from "../shared/ExperienceItem.astro";
+
+/* Types */
+import type { Experience } from "@interfaces/index";
+
+/* Utils */
+import { getLangFromUrl, useTranslations } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section title={t("experiences.title") as string} index={4}>
+  <div class="Experiences">
+    <div class="Experiences__timeline"></div>
+    <div class="Experiences__items">
+      {
+        (t("experienceItems") as unknown as Experience[]).map(
+          (experience, index) => {
+            return <ExperienceItem experience={experience} index={index} />;
+          },
+        )
+      }
+    </div>
+  </div>
+</Section>
+
+<style>
+  @reference "tailwindcss";
+  .Experiences {
+    @apply relative p-0 w-full;
+  }
+
+  .Experiences__items {
+    @apply grid grid-cols-1 gap-6  max-w-[1000px] mx-auto lg:gap-24 xl:max-w-[1200px];
+  }
+
+  .Experiences__timeline {
+    @apply hidden lg:block absolute left-[50%] top-0 bottom-0 h-full w-[4px] bg-(--secondary)/50;
+  }
+</style>

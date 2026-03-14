@@ -1,0 +1,91 @@
+---
+import type { Experience } from "@interfaces/index";
+interface Props {
+  experience: Experience;
+  index: number;
+}
+
+const { experience, index } = Astro.props;
+---
+
+<article class="ExperienceItem">
+  <div
+    class={`ExperienceItem__content ExperienceItem__content--${index % 2 === 0 ? "left" : "right"}`}
+  >
+    <p class="ExperienceItem__period">{experience.from} - {experience.until}</p>
+    <h4 class="ExperienceItem__company">{experience.company}</h4>
+    <h3 class="ExperienceItem__title">{experience.title}</h3>
+    <p class="ExperienceItem__resume">{experience.resume}</p>
+    <div
+      class={`ExperienceItem__circle ExperienceItem__circle--${index % 2 === 0 ? "left" : "right"}`}
+    >
+    </div>
+  </div>
+</article>
+
+<style>
+  @reference "tailwindcss";
+  .ExperienceItem {
+    @apply relative p-0 w-full lg:py-0;
+  }
+
+  .ExperienceItem__content {
+    @apply relative bg-(--primary)/5 border border-(--primary)/20 rounded-lg p-2 backdrop-blur-sm hover:bg-(--primary)/10 hover:border-(--primary)/75 hover:shadow-lg hover:shadow-(--primary)/20 w-full max-w-[350px] py-3 px-6 max-lg:mx-auto lg:hover:scale-[1.01]
+    md:max-w-[400px] xl:max-w-[500px];
+  }
+
+  .ExperienceItem__content:hover .ExperienceItem__period {
+    text-shadow: 0 0 1px white;
+  }
+
+  .ExperienceItem__content:hover .ExperienceItem__title {
+    text-shadow: 0 0 20px var(--primary);
+  }
+
+  .ExperienceItem__content:hover .ExperienceItem__circle {
+    @apply bg-(--secondary)/50;
+    box-shadow: 0 0 20px var(--primary);
+  }
+
+  .ExperienceItem__period,
+  .ExperienceItem__company,
+  .ExperienceItem__title {
+    @apply mb-3;
+  }
+
+  .ExperienceItem__period {
+    @apply text-(--secondary) text-sm text-shadow-2xs xl:text-base;
+  }
+
+  .ExperienceItem__company {
+    @apply text-(--primary) text-base xl:text-lg;
+  }
+
+  .ExperienceItem__title {
+    @apply text-white lg:text-xl xl:text-2xl;
+  }
+
+  .ExperienceItem__resume {
+    @apply text-sm xl:text-base;
+  }
+
+  .ExperienceItem__content--left {
+    @apply lg:translate-x-[calc(50%-113px)] xl:translate-x-[calc(50%-150px)];
+  }
+
+  .ExperienceItem__content--right {
+    @apply lg:translate-x-[calc(50%+292px)] xl:translate-x-[calc(50%+353px)];
+  }
+
+  .ExperienceItem__circle {
+    @apply hidden lg:block absolute top-12 w-6 h-6 rounded-full border-4 border-(--primary) shadow-(--primary);
+  }
+
+  .ExperienceItem__circle--left {
+    @apply lg:left-auto lg:-right-8 opacity-50;
+  }
+
+  .ExperienceItem__circle--right {
+    @apply lg:right-auto lg:-left-8 opacity-50;
+  }
+</style>

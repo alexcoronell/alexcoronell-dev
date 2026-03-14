@@ -4,6 +4,8 @@ import {
   aboutMe,
   worksEs,
   worksEn,
+  experiencesEs,
+  experiencesEn,
 } from "@data/index";
 
 export const languages = {
@@ -61,6 +63,14 @@ export const ui = {
       visit: "Visitar",
     },
     workItems: worksEs,
+    experiences: {
+      title: "Experiencias",
+      company: "Empresa",
+      from: "Desde",
+      until: "Hasta",
+      resume: "Resumen",
+    },
+    experienceItems: experiencesEs,
     resumeName: "Alexander-Coronell-Hoja-de-Vida.pdf",
     resumeShortName: "Hoja de Vida",
     resumeAriaLabel: "Descargar mi Hoja de Vida",
@@ -88,6 +98,14 @@ export const ui = {
       visit: "Visit",
     },
     workItems: worksEn,
+    experiences: {
+      title: "Experiences",
+      company: "Company",
+      from: "From",
+      until: "Until",
+      resume: "Resume",
+    },
+    experienceItems: experiencesEn,
     resumeName: "Alexander-Coronell-CV-Resume.pdf",
     resumeShortName: "Resume",
     resumeAriaLabel: "Download my Resume",
