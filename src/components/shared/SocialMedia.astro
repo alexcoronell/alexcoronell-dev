@@ -1,0 +1,106 @@
+---
+/* Components */
+import Linkedin from "@components/ui/icons/linkedin.astro";
+import Github from "@components/ui/icons/github.astro";
+import Gitlab from "@components/ui/icons/gitlab.astro";
+import Whatsapp from "@components/ui/icons/whatsapp.astro";
+import ZohoMailIcon from "@components/ui/icons/zohomail.astro";
+
+/* Data */
+import { personalData } from "@data/personal.data";
+
+/* Utils */
+import { generateLinkWhatsapp } from "@utils/index";
+
+const messageEn = "Hello, I'm interested in working with you.";
+const messageEs = "Hola, estoy interesado en trabajar contigo.";
+
+import { getLangFromUrl } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const message = lang === "es" ? messageEs : messageEn;
+const whatsappLink = generateLinkWhatsapp(message);
+---
+
+<div class="SocialMedia">
+  <a
+    class="SocialMedia__link SocialMedia__link--linkedin"
+    href={personalData.linkedin}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Linkedin class="SocialMedia__icon" />
+  </a>
+  <a
+    class="SocialMedia__link SocialMedia__link--github"
+    href={personalData.github}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Github class="SocialMedia__icon" />
+  </a>
+  <a
+    class="SocialMedia__link SocialMedia__link--gitlab"
+    href={personalData.gitlab}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Gitlab class="SocialMedia__icon" />
+  </a>
+  <a
+    class="SocialMedia__link SocialMedia__link--whatsapp"
+    href={whatsappLink}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Whatsapp class="SocialMedia__icon" />
+  </a>
+  <a
+    class="SocialMedia__link SocialMedia__link--zohomail"
+    href={`mailto:${personalData.email}`}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <ZohoMailIcon class="SocialMedia__icon" />
+  </a>
+</div>
+
+<style>
+  @reference "tailwindcss";
+  .SocialMedia {
+    @apply flex items-center justify-center gap-4 px-6 w-full max-w-[350px] mx-auto;
+  }
+
+  .SocialMedia__link {
+    @apply p-4 border border-white/10 rounded-full hover:shadow-lg hover:shadow-(--primary)/20;
+  }
+
+  .SocialMedia__link:hover {
+    @apply bg-(--secondary)/10 border-(--primary)/30;
+    box-shadow: 0 0 20px var(--primary);
+  }
+
+  .SocialMedia__link--linkedin:hover {
+    box-shadow: 0 0 20px var(--linkedin-color);
+  }
+
+  .SocialMedia__link--github:hover {
+    box-shadow: 0 0 20px var(--github-color);
+  }
+
+  .SocialMedia__link--gitlab:hover {
+    box-shadow: 0 0 20px var(--gitlab-color);
+  }
+
+  .SocialMedia__link--whatsapp:hover {
+    box-shadow: 0 0 20px var(--whatsapp-color);
+  }
+
+  .SocialMedia__link--zohomail:hover {
+    box-shadow: 0 0 20px var(--zohomail-color);
+  }
+
+  .SocialMedia__icon {
+    @apply w-6 h-6;
+  }
+</style>
