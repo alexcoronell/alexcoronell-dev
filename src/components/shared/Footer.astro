@@ -6,6 +6,24 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<footer>
-  <p>{t("footer")}</p>
+<footer class="Footer">
+  <div class="Footer__line"></div>
+  <h6 class="Footer__text">{t("footer")}</h6>
 </footer>
+
+<style>
+  @reference "tailwindcss";
+  .Footer__line {
+    @apply h-1 my-0 px-1 opacity-30 w-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--primary),
+      var(--secondary),
+      transparent
+    );
+  }
+  .Footer__text {
+    @apply text-center text-sm opacity-50 leading-20;
+  }
+</style>
