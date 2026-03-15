@@ -17,10 +17,13 @@ import "../styles/global.css";
     <title>Astro Basics</title>
   </head>
   <body>
+    <a href="#main-content" class="skip-link"> Skip to main content </a>
     <FilmGrain />
     <ScanLines />
     <Header />
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

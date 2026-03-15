@@ -25,11 +25,75 @@
       : "Error enviando tu mensaje, intenta otra vez",
   );
   const buttonMessage = $derived($languageStore === "en" ? "Close" : "Cerrar");
+
+  let modalElement = $state<HTMLElement>();
+  let previousFocus: HTMLElement | null = null;
+  let focusableElements: HTMLElement[] = [];
+
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setContactModalStatus("init");
+    }
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const currentIndex = focusableElements.indexOf(
+        document.activeElement as HTMLElement,
+      );
+      const nextIndex = e.shiftKey
+        ? (currentIndex - 1 + focusableElements.length) %
+          focusableElements.length
+        : (currentIndex + 1) % focusableElements.length;
+      focusableElements[nextIndex]?.focus();
+    }
+  };
+
+  const trapFocus = () => {
+    if (!modalElement) return;
+
+    focusableElements = Array.from(
+      modalElement.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      ),
+    ) as HTMLElement[];
+
+    if (focusableElements.length > 0) {
+      previousFocus = document.activeElement as HTMLElement;
+      focusableElements[0].focus();
+    }
+  };
+
+  const releaseFocus = () => {
+    if (previousFocus) {
+      previousFocus.focus();
+      previousFocus = null;
+    }
+  };
+
+  $effect(() => {
+    if ($contactModalStatus !== "init" && modalElement) {
+      trapFocus();
+      const cleanup = () => {
+        document.removeEventListener("keydown", handleKeydown);
+        releaseFocus();
+      };
+      document.addEventListener("keydown", handleKeydown);
+      return cleanup;
+    }
+  });
 </script>
 
 {#if $contactModalStatus !== "init"}
   <div class="ContactModal">
-    <div class="ContactModal__box">
+    <div
+      class="ContactModal__box"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      bind:this={modalElement}
+    >
+      <h2 id="modal-title" class="sr-only">
+        {$languageStore === "en" ? "Message Status" : "Estado del Mensaje"}
+      </h2>
       {#if $contactModalStatus === "loading"}
         <Loading class="text-(--secondary)" size={iconSize} />
         <p class="text-(--primary)">{loadingMessage}</p>
@@ -44,6 +108,7 @@
         <button
           class="btn btn-primary"
           onclick={() => setContactModalStatus("init")}
+          aria-label={buttonMessage}
         >
           {buttonMessage}
         </button>
@@ -66,9 +131,5 @@
       rgba(10, 15, 25, 0.95)
     );
     box-shadow: 0 0 20px var(--secondary) / 90;
-  }
-
-  .ContactModal__loadingIcon {
-    @apply w-12 h-12;
   }
 </style>

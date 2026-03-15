@@ -28,40 +28,47 @@ const whatsappLink = generateLinkWhatsapp(message);
     href={personalData.linkedin}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={lang === "es" ? "Perfil de LinkedIn" : "LinkedIn profile"}
   >
-    <Linkedin class="SocialMedia__icon" />
+    <Linkedin class="SocialMedia__icon" aria-hidden="true" />
   </a>
   <a
     class="SocialMedia__link SocialMedia__link--github"
     href={personalData.github}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={lang === "es" ? "Perfil de GitHub" : "GitHub profile"}
   >
-    <Github class="SocialMedia__icon" />
+    <Github class="SocialMedia__icon" aria-hidden="true" />
   </a>
   <a
     class="SocialMedia__link SocialMedia__link--gitlab"
     href={personalData.gitlab}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={lang === "es" ? "Perfil de GitLab" : "GitLab profile"}
   >
-    <Gitlab class="SocialMedia__icon" />
+    <Gitlab class="SocialMedia__icon" aria-hidden="true" />
   </a>
   <a
     class="SocialMedia__link SocialMedia__link--whatsapp"
     href={whatsappLink}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={lang === "es"
+      ? "Contactar por WhatsApp"
+      : "Contact via WhatsApp"}
   >
-    <Whatsapp class="SocialMedia__icon" />
+    <Whatsapp class="SocialMedia__icon" aria-hidden="true" />
   </a>
   <a
     class="SocialMedia__link SocialMedia__link--zohomail"
     href={`mailto:${personalData.email}`}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={lang === "es" ? "Enviar correo electrónico" : "Send email"}
   >
-    <ZohoMailIcon class="SocialMedia__icon" />
+    <ZohoMailIcon class="SocialMedia__icon" aria-hidden="true" />
   </a>
 </div>
 

@@ -14,14 +14,24 @@ const t = useTranslations(lang);
 
 <div class="Menu">
   <label for="menu-toggle">
-    <MenuIcon class="MenuIcon" />
+    <MenuIcon class="MenuIcon" aria-hidden="true" />
+    <span class="sr-only">
+      {lang === "es" ? "Abrir menú de navegación" : "Open navigation menu"}
+    </span>
   </label>
   <input type="checkbox" id="menu-toggle" class="hidden" />
   <div class="Menu__overlay"></div>
   <nav class="Menu__nav" id="menu-nav">
     <div class="flex justify-end">
       <label for="menu-toggle">
-        <CloseIcon class="CloseIcon" />
+        <CloseIcon class="CloseIcon" aria-hidden="true" />
+        <span class="sr-only">
+          {
+            lang === "es"
+              ? "Cerrar menú de navegación"
+              : "Close navigation menu"
+          }
+        </span>
       </label>
     </div>
     <ul>
@@ -65,12 +75,12 @@ const t = useTranslations(lang);
     <div class="Nav__flags">
       {
         lang === "es" ? (
-          <a href="/en">
-            <UsaFlagIcon class="FlagIcon" />
+          <a href="/en" aria-label="Cambiar a inglés">
+            <UsaFlagIcon class="FlagIcon" aria-hidden="true" />
           </a>
         ) : (
-          <a href="/">
-            <SpainFlagIcon class="FlagIcon" />
+          <a href="/" aria-label="Switch to Spanish">
+            <SpainFlagIcon class="FlagIcon" aria-hidden="true" />
           </a>
         )
       }
@@ -138,6 +148,18 @@ const t = useTranslations(lang);
 
   .Menu label {
     @apply xl:hidden;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>
 

@@ -13,6 +13,7 @@
   height="16"
   viewBox="0 0 16 16"
   class="{size} {className}"
+  aria-hidden="true"
 >
   <path
     fill="currentColor"
