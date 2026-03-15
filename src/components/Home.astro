@@ -5,6 +5,7 @@ import Skills from "./home/Skills.astro";
 import Works from "./home/Works.astro";
 import Experiences from "./home/Experiences.astro";
 import Contact from "./home/Contact.astro";
+import ContactModal from "./shared/ContactModal.svelte";
 ---
 
 <Hero />
@@ -13,3 +14,4 @@ import Contact from "./home/Contact.astro";
 <Works />
 <Experiences />
 <Contact />
+<ContactModal client:only="svelte" />

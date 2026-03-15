@@ -13,7 +13,7 @@ const t = useTranslations(lang);
 
 <Section title={t("contact") as string} index={5}>
   <article class="Contact">
-    <Form client:only="svelte" />
+    <Form client:only="svelte" lang={lang} />
     <SocialMedia />
   </article>
 </Section>

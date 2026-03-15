@@ -4,6 +4,10 @@
   import type { ContactMessage } from "@/core/interfaces";
   import { emailValidator } from "@/core/validators";
   import { sendContactMessage } from "@/core/utils";
+  import {
+    setLanguage,
+    setContactModalStatus,
+  } from "@/stores/contactModal.store";
 
   const { lang = "es" } = $props();
 
@@ -69,15 +73,21 @@
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
+    setLanguage(lang as "es" | "en");
     if (!validateForm()) return;
-
+    setContactModalStatus("loading");
     sendContactMessage(message)
       .then(() => {
-        alert("Message sent successfully");
+        setContactModalStatus("success");
         resetForm();
       })
       .catch(() => {
-        alert("Error sending message");
+        setContactModalStatus("error");
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setContactModalStatus("init");
+        }, 3000);
       });
   };
 
@@ -97,7 +107,7 @@
   };
 </script>
 
-<form onsubmit={(e) => handleSubmit(e)}>
+<form class="Form" onsubmit={(e) => handleSubmit(e)}>
   <Input
     name="fullname"
     type="text"
@@ -126,10 +136,23 @@
     placeholder={null}
     bind:value={message.message}
   ></TextArea>
-  <button
-    class="btn btn-primary"
-    aria-label={lang === "es" ? "Enviar mensaje" : "Send message"}
-  >
-    {lang === "es" ? "Enviar mensaje" : "Send message"}
-  </button>
+  <div class="Form__buttonArea">
+    <button
+      class="btn btn-primary"
+      aria-label={lang === "es" ? "Enviar mensaje" : "Send message"}
+    >
+      {lang === "es" ? "Enviar mensaje" : "Send message"}
+    </button>
+  </div>
 </form>
+
+<style>
+  @reference "tailwindcss";
+  .Form {
+    @apply w-full max-w-[400px] mx-auto xl:max-w-[600px];
+  }
+
+  .Form__buttonArea {
+    @apply flex items-center justify-center;
+  }
+</style>
