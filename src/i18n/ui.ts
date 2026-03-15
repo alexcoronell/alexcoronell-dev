@@ -18,7 +18,6 @@ export const defaultLang = "es";
 export type NavKey =
   | "nav.about"
   | "nav.skills"
-  | "nav.learning"
   | "nav.works"
   | "nav.experiences"
   | "nav.contact";
@@ -26,7 +25,7 @@ export type NavKey =
 export const uiMenu = {
   es: {
     "nav.about": "acerca",
-    "nav.skills": "skills",
+    "nav.skills": "habilidades",
     "nav.works": "portafolio",
     "nav.experiences": "experiencia",
     "nav.contact": "contacto",
@@ -34,7 +33,7 @@ export const uiMenu = {
   en: {
     "nav.about": "about",
     "nav.skills": "skills",
-    "nav.learning": "learning",
+    "nav.works": "portfolio",
     "nav.experiences": "experiences",
     "nav.contact": "contact",
   },
@@ -64,7 +63,7 @@ export const ui = {
     },
     workItems: worksEs,
     experiences: {
-      title: "Experiencias",
+      title: "Experiencia",
       company: "Empresa",
       from: "Desde",
       until: "Hasta",

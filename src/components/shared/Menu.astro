@@ -30,10 +30,9 @@ const t = useTranslations(lang);
           const sectionId = value;
           return (
             <li>
-              <a
+              <button
                 class="Menu__item"
-                href={"#" + sectionId}
-                data-scroll-to={sectionId}
+                onclick={`scrollToSection('${sectionId}')`}
                 aria-label={`Go to ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} section`}
               >
                 <span class="Menu__itemIndex">0{index + 1}.</span>
@@ -47,7 +46,7 @@ const t = useTranslations(lang);
                     (value as string).slice(1)}{" "}
                   section
                 </span>
-              </a>
+              </button>
             </li>
           );
         })
@@ -141,3 +140,27 @@ const t = useTranslations(lang);
     @apply xl:hidden;
   }
 </style>
+
+<script>
+  declare global {
+    interface Window {
+      scrollToSection: (sectionId: string) => void;
+    }
+  }
+
+  function scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      const menuToggle = document.getElementById(
+        "menu-toggle",
+      ) as HTMLInputElement;
+      if (menuToggle) {
+        menuToggle.checked = false;
+      }
+    }
+  }
+
+  // Make function globally available
+  window.scrollToSection = scrollToSection;
+</script>

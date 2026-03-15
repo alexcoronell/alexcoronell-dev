@@ -6,11 +6,12 @@ interface Props {
 }
 
 const { title, index, isMain = false } = Astro.props;
+const sectionId = title.toLowerCase().split(" ")[0];
 ---
 
 {
   isMain ? (
-    <main class="Section">
+    <main class="Section" id={sectionId}>
       <div class="Section__titleArea">
         <h4 class="Section__index">
           {index < 10 ? "0" : ""}
@@ -21,7 +22,7 @@ const { title, index, isMain = false } = Astro.props;
       <slot />
     </main>
   ) : (
-    <section class="Section">
+    <section class="Section" id={sectionId}>
       <div class="Section__titleArea">
         <h4 class="Section__index">
           {index < 10 ? "0" : ""}
