@@ -9,12 +9,12 @@
       "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
       "@config/*": ["./config/*"],
+      "@core/*": ["./core/*"],
       "@layouts/*": ["./layouts/*"],
       "@data/*": ["./core/data/*"],
       "@i18n/*": ["./i18n/*"],
       "@interfaces/*": ["./core/interfaces/*"],
       "@stores/*": ["./stores/*"],
-      "@types/*": ["./core/types/*"],
       "@utils/*": ["./core/utils/*"],
       "@validators/*": ["./core/validators/*"]
     }

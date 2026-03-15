@@ -50,6 +50,8 @@ const worksSectionId = lang === "es" ? "portafolio" : "works";
     );
     opacity: 0.5;
     animation: cityMove 120s linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .city-mid {
@@ -61,6 +63,8 @@ const worksSectionId = lang === "es" ? "portafolio" : "works";
     );
     opacity: 0.7;
     animation: cityMove 80s linear infinite reverse;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .city-near {
@@ -79,11 +83,15 @@ const worksSectionId = lang === "es" ? "portafolio" : "works";
   .hero__glow--cyan {
     @apply bg-(--primary) top-[10%] left-[10%];
     animation: glowPulse 4s ease-in-out infinite;
+    will-change: opacity, transform;
+    transform: translateZ(0);
   }
 
   .hero__glow--magenta {
     @apply bg-(--secondary) top-[20%] left-[40%];
     animation: glowPulse 4s ease-in-out infinite;
+    will-change: opacity, transform;
+    transform: translateZ(0);
   }
 
   .hero__content {
@@ -104,10 +112,10 @@ const worksSectionId = lang === "es" ? "portafolio" : "works";
 
   @keyframes cityMove {
     0% {
-      transform: translateX(0);
+      transform: translateX(0) translateZ(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
     }
   }
 
@@ -115,11 +123,11 @@ const worksSectionId = lang === "es" ? "portafolio" : "works";
     0%,
     100% {
       opacity: 0.2;
-      transform: scale(1);
+      transform: scale(1) translateZ(0);
     }
     50% {
       opacity: 0.4;
-      transform: scale(1.1);
+      transform: scale(1.1) translateZ(0);
     }
   }
 </style>

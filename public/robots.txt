@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block admin/private areas (if they exist in the future)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow crawling of important directories
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+Sitemap: https://alexcoronell.dev/sitemap-index.xml

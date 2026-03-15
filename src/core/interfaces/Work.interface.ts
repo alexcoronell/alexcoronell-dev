@@ -1,4 +1,4 @@
-import type { StatusWork, RepoOrigin } from "@types/index";
+import type { StatusWork, RepoOrigin } from "@core/types";
 
 export interface Work {
   title: string;

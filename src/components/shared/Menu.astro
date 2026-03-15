@@ -21,7 +21,12 @@ const t = useTranslations(lang);
   </label>
   <input type="checkbox" id="menu-toggle" class="hidden" />
   <div class="Menu__overlay"></div>
-  <nav class="Menu__nav" id="menu-nav">
+  <nav
+    class="Menu__nav"
+    id="menu-nav"
+    role="navigation"
+    aria-label="Main navigation"
+  >
     <div class="flex justify-end">
       <label for="menu-toggle">
         <CloseIcon class="CloseIcon" aria-hidden="true" />
@@ -34,16 +39,18 @@ const t = useTranslations(lang);
         </span>
       </label>
     </div>
-    <ul>
+    <ul role="menubar">
       {
-        Object.entries(t("nav")).map(([key, value], index) => {
+        Object.entries(t("nav")).map(([_, value], index) => {
           const sectionId = value;
           return (
-            <li>
+            <li role="none">
               <button
                 class="Menu__item"
+                data-section={sectionId}
                 onclick={`scrollToSection('${sectionId}')`}
-                aria-label={`Go to ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} section`}
+                role="menuitem"
+                aria-expanded="false"
               >
                 <span class="Menu__itemIndex">0{index + 1}.</span>
                 <span class="Menu__itemName">
@@ -173,7 +180,11 @@ const t = useTranslations(lang);
   function scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      });
+
       const menuToggle = document.getElementById(
         "menu-toggle",
       ) as HTMLInputElement;
@@ -185,4 +196,23 @@ const t = useTranslations(lang);
 
   // Make function globally available
   window.scrollToSection = scrollToSection;
+
+  // Event delegation for better performance
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuNav = document.getElementById("menu-nav");
+    if (menuNav) {
+      menuNav.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const menuItem = target.closest(".Menu__item");
+        if (menuItem && menuItem instanceof HTMLButtonElement) {
+          const sectionId = menuItem.getAttribute("data-section");
+          if (sectionId) {
+            requestAnimationFrame(() => {
+              scrollToSection(sectionId);
+            });
+          }
+        }
+      });
+    }
+  });
 </script>
