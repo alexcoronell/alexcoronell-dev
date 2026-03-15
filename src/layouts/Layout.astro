@@ -5,7 +5,7 @@ import ScanLines from "@components/shared/ScanLines.astro";
 import Footer from "@components/shared/Footer.astro";
 import "../styles/global.css";
 
-import { personalData } from "@data/index";
+import { personalData, site } from "@/core/data";
 
 /* Utils */
 import { getLangFromUrl, useTranslations } from "@/i18n";
@@ -13,7 +13,102 @@ import { getLangFromUrl, useTranslations } from "@/i18n";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-console.log(lang);
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: personalData.fullName,
+      jobTitle:
+        lang === "es"
+          ? ["Desarrollador Full Stack", "Desarrollador Freelance"]
+          : ["Full Stack Developer", "Freelance Software Developer"],
+      email: personalData.email,
+      telephone: personalData.phone,
+      url: site,
+      image: `${site}/assets/images/profile/alex-coronell-desktop.webp`,
+      sameAs: [personalData.github, personalData.gitlab, personalData.linkedin],
+      knowsLanguage: ["Spanish", "English"],
+      description:
+        lang === "es"
+          ? "Desarrollador Full Stack experimentado especializado en tecnologías web modernas"
+          : "Experienced Full Stack Developer specializing in modern web technologies",
+      offers: {
+        "@type": "Offer",
+        name:
+          lang === "es"
+            ? "Servicios de Desarrollo Freelance"
+            : "Freelance Development Services",
+        description:
+          lang === "es"
+            ? "Desarrollo web personalizado, integración de APIs, aplicaciones full stack"
+            : "Custom web development, API integration, full stack applications",
+        areaServed: "Worldwide",
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: site,
+          availableLanguage: ["Spanish", "English"],
+        },
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${site}#organization`,
+      name:
+        lang === "es"
+          ? "Alex Coronell - Servicios Freelance"
+          : "Alex Coronell - Freelance Services",
+      url: site,
+      email: personalData.email,
+      telephone: personalData.phone,
+      sameAs: [personalData.github, personalData.gitlab, personalData.linkedin],
+      description:
+        lang === "es"
+          ? "Servicios profesionales de desarrollo de software y aplicaciones web"
+          : "Professional software development and web application services",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site}#website`,
+      name: `${personalData.shortName} | ${t("myTitle")}`,
+      url: site,
+      inLanguage: lang,
+      publisher: {
+        "@id": `${site}#organization`,
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${site}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${site}#webpage`,
+      url: site,
+      name: `${personalData.shortName} | ${t("myTitle")}`,
+      inLanguage: lang,
+      isPartOf: {
+        "@id": `${site}#website`,
+      },
+      about: {
+        "@type": "Person",
+        name: personalData.fullName,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: lang === "es" ? "Inicio" : "Home",
+          item: site,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -25,6 +120,54 @@ console.log(lang);
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{personalData.shortName} | {t("myTitle")}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content={lang === "es"
+        ? "Desarrollador Full Stack experimentado especializado en tecnologías web modernas. Servicios de desarrollo freelance personalizados."
+        : "Experienced Full Stack Developer specializing in modern web technologies. Custom freelance development services."}
+    />
+    <meta name="author" content={personalData.fullName} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={site} />
+    <meta
+      property="og:title"
+      content={`${personalData.shortName} | ${t("myTitle")}`}
+    />
+    <meta
+      property="og:description"
+      content={lang === "es"
+        ? "Desarrollador Full Stack experimentado especializado en tecnologías web modernas"
+        : "Experienced Full Stack Developer specializing in modern web technologies"}
+    />
+    <meta
+      property="og:image"
+      content={`${site}/assets/images/profile/alex-coronell-desktop.webp`}
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={site} />
+    <meta
+      property="twitter:title"
+      content={`${personalData.shortName} | ${t("myTitle")}`}
+    />
+    <meta
+      property="twitter:description"
+      content={lang === "es"
+        ? "Desarrollador Full Stack experimentado especializado en tecnologías web modernas"
+        : "Experienced Full Stack Developer specializing in modern web technologies"}
+    />
+    <meta
+      property="twitter:image"
+      content={`${site}/assets/images/profile/alex-coronell-desktop.webp`}
+    />
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body>
     <a href="#main-content" class="skip-link"> Skip to main content </a>
