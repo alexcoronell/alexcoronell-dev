@@ -1,0 +1,43 @@
+<script lang="ts">
+  import type { FullAutoFill } from "svelte/elements";
+  export let name: string;
+  export let type: string = "text";
+  export let label: string;
+  export let placeholder: string | null;
+  export let classes: string = "";
+  export let error: string = "";
+  export let value: string | number = "";
+  export let autocomplete: FullAutoFill | null = null;
+  export let validator: (() => any) | undefined = undefined;
+  export let required: boolean = false;
+</script>
+
+<div class={`form-group ${classes}`.trim()}>
+  <label for={name}>{label}</label>
+  <input
+    style={error !== "" ? "border-color: #e7000b;" : ""}
+    {type}
+    {name}
+    id={name}
+    {placeholder}
+    bind:value
+    onchange={validator}
+    oninput={validator}
+    onkeyup={validator}
+    onblur={validator}
+    aria-label={placeholder}
+    aria-invalid={error !== ""}
+    aria-describedby={`${name}-error`}
+    aria-required={required}
+    {autocomplete}
+  />
+  <p
+    aria-live="polite"
+    id={`${name}-error`}
+    role="alert"
+    aria-hidden={error === "" ? "false" : "true"}
+    class="form-group__error"
+  >
+    {error}
+  </p>
+</div>

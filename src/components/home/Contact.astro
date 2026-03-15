@@ -1,6 +1,7 @@
 ---
 /* Components */
 import Section from "../shared/Section.astro";
+import Form from "../shared/Form.svelte";
 import SocialMedia from "../shared/SocialMedia.astro";
 
 /* Utils */
@@ -12,21 +13,14 @@ const t = useTranslations(lang);
 
 <Section title={t("contact") as string} index={5}>
   <article class="Contact">
+    <Form client:only="svelte" />
     <SocialMedia />
   </article>
 </Section>
 
 <style>
   @reference "tailwindcss";
-  .About {
-    @apply lg:grid lg:grid-cols-2;
-  }
-  .About__picture {
-    @apply w-full flex items-center justify-center mb-6 lg:items-end;
-  }
-
-  .About__picture img {
-    @apply w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-2/3;
-    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  .Contact {
+    @apply grid grid-cols-1 gap-6;
   }
 </style>

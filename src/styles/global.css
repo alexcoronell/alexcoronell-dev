@@ -22,6 +22,7 @@
   --gitlab-color: #fca326;
   --whatsapp-color: #25d366;
   --zohomail-color: #0066ff;
+  --error-color: #e7000b;
 }
 
 * {
@@ -85,4 +86,20 @@ p {
 
 .btn-secondary {
   @apply border-(--secondary)/50 text-(--secondary)/75 hover:border-(--secondary) hover:bg-(--secondary)/50 hover:text-(--primary-text)/90 hover:shadow-2xl hover:shadow-(--secondary)/50;
+}
+
+.form-group {
+  @apply relative flex flex-col items-start justify-start pb-6;
+}
+
+.form-group label {
+  @apply text-white mb-1;
+}
+.form-group input,
+.form-group textarea {
+  @apply outline-0 border border-(--primary)/50 w-full rounded-sm px-4 py-3 text-(--primary) focus:border-(--primary);
+}
+
+.form-group p {
+  @apply absolute text-(--error-color) text-sm left-0 -bottom-2 right-auto top-auto;
 }
