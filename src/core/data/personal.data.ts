@@ -9,4 +9,5 @@ export const personalData = {
   linkedin: "http://linkedin.com/in/alex-coronell",
   github: "https://github.com/alexcoronell",
   gitlab: "https://gitlab.com/alexcoronell",
+  website: "https://alexcoronell.dev",
 };

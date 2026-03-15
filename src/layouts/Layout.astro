@@ -109,6 +109,10 @@ const schemaData = {
     },
   ],
 };
+
+const url = Astro.url;
+const path = url.pathname;
+const location = `${personalData.website}${path}`;
 ---
 
 <!doctype html>
@@ -120,6 +124,7 @@ const schemaData = {
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{personalData.shortName} | {t("myTitle")}</title>
+    <link rel="canonical" href={location} />
 
     <!-- SEO Meta Tags -->
     <meta
