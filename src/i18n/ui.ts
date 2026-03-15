@@ -42,6 +42,7 @@ export const uiMenu = {
 export const ui = {
   es: {
     nav: uiMenu.es,
+    myTitle: "Desarrollador Full Stack",
     hero: {
       subtitle: "Hola, mi nombre es",
       description:
@@ -78,6 +79,7 @@ export const ui = {
   },
   en: {
     nav: uiMenu.en,
+    myTitle: "Full Stack Developer",
     hero: {
       subtitle: "Hi, my name is",
       description:
