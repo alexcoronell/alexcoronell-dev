@@ -1,0 +1,40 @@
+---
+/* Data */
+import { personalData } from "@/core/data";
+
+const mobileImage = "assets/images/profile/alex-coronell-mobile.webp";
+const desktopImage = "assets/images/profile/alex-coronell-desktop.webp";
+---
+
+<div class="ProfilePicture">
+  <img
+    src={mobileImage}
+    alt={personalData.shortName + " profile"}
+    width="220"
+    height="292"
+    class="w-full max-w-[220px] lg:hidden"
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    src={desktopImage}
+    alt={personalData.shortName + " profile"}
+    width="300"
+    height="470"
+    class="w-full hidden lg:block"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<style>
+  @reference "tailwindcss";
+  .ProfilePicture {
+    @apply w-full flex items-center justify-center mb-6 lg:items-end;
+  }
+
+  .ProfilePicture img {
+    @apply w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-2/3;
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  }
+</style>
