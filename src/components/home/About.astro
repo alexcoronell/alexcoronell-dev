@@ -1,40 +1,18 @@
 ---
 /* Components */
 import Section from "../shared/Section.astro";
+import ProfilePicture from "../shared/ProfilePicture.astro";
 
-/* Data */
-import { personalData } from "@/core/data";
 /* Utils */
 import { getLangFromUrl, useTranslations } from "@/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const mobileImage = "assets/images/profile/alex-coronell-mobile.webp";
-const desktopImage = "assets/images/profile/alex-coronell-desktop.webp";
 ---
 
 <Section title={t("about.title") as string} index={1}>
   <article class="About">
-    <div class="About__picture">
-      <img
-        src={mobileImage}
-        alt={personalData.shortName + " profile"}
-        width="220"
-        height="292"
-        class="w-full max-w-[220px] lg:hidden"
-        loading="lazy"
-        decoding="async"
-      />
-      <img
-        src={desktopImage}
-        alt={personalData.shortName + " profile"}
-        width="300"
-        height="470"
-        class="w-full hidden lg:block"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
+    <ProfilePicture />
     <div class="About__content">
       {
         Object.entries(t("about.content")).map(([_, value]) => {
@@ -49,13 +27,5 @@ const desktopImage = "assets/images/profile/alex-coronell-desktop.webp";
   @reference "tailwindcss";
   .About {
     @apply lg:grid lg:grid-cols-2;
-  }
-  .About__picture {
-    @apply w-full flex items-center justify-center mb-6 lg:items-end;
-  }
-
-  .About__picture img {
-    @apply w-1/2 lg:w-4/5 xl:w-3/5 2xl:w-2/3;
-    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
   }
 </style>
