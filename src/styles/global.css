@@ -182,7 +182,7 @@ p {
 
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -42px;
   left: 6px;
   background: var(--primary);
   color: var(--dark-bg);
@@ -196,6 +196,14 @@ p {
 
 .skip-link:focus {
   top: 6px;
+}
+
+#content-start {
+  scroll-margin-top: 2rem;
+}
+
+#content-start:focus {
+  outline: none;
 }
 
 .sr-only {
