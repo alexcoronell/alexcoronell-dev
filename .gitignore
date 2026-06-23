@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # skill registry cache
 .atl/
+
+# Playwright
+playwright-report/
+test-results/
