@@ -1,15 +1,29 @@
 <script lang="ts">
   import type { FullAutoFill } from "svelte/elements";
-  export let name: string;
-  export let type: string = "text";
-  export let label: string;
-  export let placeholder: string | null;
-  export let classes: string = "";
-  export let error: string = "";
-  export let value: string | number = "";
-  export let autocomplete: FullAutoFill | null = null;
-  export let validator: (() => any) | undefined = undefined;
-  export let required: boolean = false;
+
+  let {
+    name,
+    type = "text",
+    label,
+    placeholder,
+    classes = "",
+    error = "",
+    value = $bindable(""),
+    autocomplete = null,
+    validator = undefined,
+    required = false,
+  }: {
+    name: string;
+    type?: string;
+    label: string;
+    placeholder: string | null;
+    classes?: string;
+    error?: string;
+    value?: string | number;
+    autocomplete?: FullAutoFill | null;
+    validator?: (() => any) | undefined;
+    required?: boolean;
+  } = $props();
 </script>
 
 <div class={`form-group ${classes}`.trim()}>
