@@ -1,13 +1,25 @@
 <script lang="ts">
-  export let name: string;
-  export let rows: number;
-  export let label: string;
-  export let placeholder: string | null;
-  export let error: string = "";
-  export let value: string;
-  export let classes: string = "";
-  export let validator: (() => any) | undefined = undefined;
-  export let required: boolean = false;
+  let {
+    name,
+    rows,
+    label,
+    placeholder,
+    error = "",
+    value = $bindable(""),
+    classes = "",
+    validator = undefined,
+    required = false,
+  }: {
+    name: string;
+    rows: number;
+    label: string;
+    placeholder: string | null;
+    error?: string;
+    value?: string;
+    classes?: string;
+    validator?: (() => any) | undefined;
+    required?: boolean;
+  } = $props();
 </script>
 
 <div class={`form-group ${classes}`.trim()}>
