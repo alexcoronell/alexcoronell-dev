@@ -8,9 +8,12 @@ interface Props {
 const { experience, index } = Astro.props;
 ---
 
-<article class="ExperienceItem">
+<article
+  class={`ExperienceItem ${index % 2 === 0 ? "ExperienceItem--left" : "ExperienceItem--right"}`}
+>
+  {index % 2 === 1 && <div class="max-lg:hidden" />}
   <div
-    class={`ExperienceItem__content ExperienceItem__content--${index % 2 === 0 ? "left" : "right"}`}
+    class={`ExperienceItem__content ${index % 2 === 1 ? "lg:translate-x-1.5" : "lg:-translate-x-0.5 "}`}
   >
     <p class="ExperienceItem__period">{experience.from} - {experience.until}</p>
     <h4 class="ExperienceItem__company">{experience.company}</h4>
@@ -26,7 +29,15 @@ const { experience, index } = Astro.props;
 <style>
   @reference "tailwindcss";
   .ExperienceItem {
-    @apply relative p-0 w-full lg:py-0;
+    @apply relative p-0 w-full lg:py-0 lg:grid lg:grid-cols-2;
+  }
+
+  .ExperienceItem--left {
+    @apply justify-items-end;
+  }
+
+  .ExperienceItem--right {
+    @apply justify-items-start;
   }
 
   .ExperienceItem__content {
@@ -67,14 +78,6 @@ const { experience, index } = Astro.props;
 
   .ExperienceItem__resume {
     @apply text-sm xl:text-base;
-  }
-
-  .ExperienceItem__content--left {
-    @apply lg:translate-x-[calc(50%-113px)] xl:translate-x-[calc(50%-150px)];
-  }
-
-  .ExperienceItem__content--right {
-    @apply lg:translate-x-[calc(50%+292px)] xl:translate-x-[calc(50%+353px)];
   }
 
   .ExperienceItem__circle {
