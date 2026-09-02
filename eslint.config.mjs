@@ -9,6 +9,7 @@ export default [
     ignores: [
       "node_modules/",
       "dist/",
+      "storybook-static/",
       ".astro/",
       "public/",
       ".vscode/",
