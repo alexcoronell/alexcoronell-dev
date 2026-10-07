@@ -84,9 +84,6 @@ importers:
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@10.12.0(jiti@2.7.0)(supports-color@7.2.0))
-      eslint-js:
-        specifier: github:eslint/js
-        version: https://codeload.github.com/eslint/js/tar.gz/b6c8b31e33fcfe0d40742ca476b753c6aad9af8a
       eslint-plugin-astro:
         specifier: ^1.7.0
         version: 1.7.0(eslint@10.12.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
@@ -2444,9 +2441,6 @@ packages:
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
-
-  eslint-js@https://codeload.github.com/eslint/js/tar.gz/b6c8b31e33fcfe0d40742ca476b753c6aad9af8a:
-    resolution: {gitHosted: true, integrity: sha512-E/zyZfb7BDxELucSG/uCy6R+I8N7YQpp0u19t29wsJkVKeO07YteWoJAUU69AAvu1/Y2m1VdgZbTHV5x2nDRyA==, tarball: https://codeload.github.com/eslint/js/tar.gz/b6c8b31e33fcfe0d40742ca476b753c6aad9af8a}
 
   eslint-json-compat-utils@0.2.3:
     resolution: {integrity: sha512-RbBmDFyu7FqnjE8F0ZxPNzx5UaptdeS9Uu50r7A+D7s/+FCX+ybiyViYEgFUaFIFqSWJgZRTpL5d8Kanxxl2lQ==}
@@ -6506,8 +6500,6 @@ snapshots:
   eslint-config-prettier@10.1.8(eslint@10.12.0(jiti@2.7.0)(supports-color@7.2.0)):
     dependencies:
       eslint: 10.12.0(jiti@2.7.0)(supports-color@7.2.0)
-
-  eslint-js@https://codeload.github.com/eslint/js/tar.gz/b6c8b31e33fcfe0d40742ca476b753c6aad9af8a: {}
 
   eslint-json-compat-utils@0.2.3(eslint@10.12.0(jiti@2.7.0)(supports-color@7.2.0))(jsonc-eslint-parser@3.3.0):
     dependencies:
