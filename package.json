@@ -13,7 +13,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
-    "lint": "eslint . --ext .js,.ts,.astro,.svelte",
+    "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky",
     "pre-commit": "lint-staged",
