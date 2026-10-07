@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: 📥 Checkout code
+      - name:  Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # CRÍTICO: commitlint necesita el historial completo
@@ -26,13 +26,16 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: pnpm # Cache automático de node_modules
+          node-version: 24
+          cache: pnpm
 
-      - name: 📦 Enable Corepack and setup pnpm
-        run: corepack enable && corepack prepare pnpm@12 --activate
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12
+          run_install: false
 
-      - name:  Install dependencies
+      - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: 🔎 Lint code (ESLint)
@@ -49,7 +52,7 @@ jobs:
         with:
           configFile: commitlint.config.js
 
-      - name: ️ Build Astro project
+      - name: 🏗️ Build Astro project
         run: pnpm run build
 
       - name: 📤 Upload build artifacts
