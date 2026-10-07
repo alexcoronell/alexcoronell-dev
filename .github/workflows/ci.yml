@@ -1,0 +1,64 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+# Cancela ejecuciones anteriores de la misma rama para ahorrar minutos de GitHub Actions
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-and-build:
+    name: 🔍 Validate & Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # CRÍTICO: commitlint necesita el historial completo
+
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm # Cache automático de node_modules
+
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔎 Lint code (ESLint)
+        run: pnpm run lint
+
+      - name: 🧪 Type check (Astro)
+        run: pnpm run check
+
+      - name: 🧪 Run unit tests (Vitest)
+        run: pnpm run test:run
+
+      - name: 📝 Validate commits (commitlint)
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: commitlint.config.js
+
+      - name: 🏗️ Build Astro project
+        run: pnpm run build
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: astro-build
+          path: dist/
+          retention-days: 7
