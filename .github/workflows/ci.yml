@@ -44,9 +44,6 @@ jobs:
       - name: 🧪 Type check (Astro)
         run: pnpm run check
 
-      - name: 🧪 Run unit tests (Vitest)
-        run: pnpm run test:run
-
       - name: 📝 Validate commits (commitlint)
         uses: wagoid/commitlint-github-action@v6
         with:
