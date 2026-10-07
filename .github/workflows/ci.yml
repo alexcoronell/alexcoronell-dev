@@ -13,27 +13,27 @@ concurrency:
 
 jobs:
   validate-and-build:
-    name: 🔍 Validate & Build
+    name:  Validate & Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
-    steps:
+steps:
       - name:  Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # CRÍTICO: commitlint necesita el historial completo
+
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12
+          run_install: false
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
-
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 12
-          run_install: false
 
       - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile
