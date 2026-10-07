@@ -1,5 +1,6 @@
 allowBuilds:
   esbuild: true
   sharp: true
+  eslint-js@https://codeload.github.com/eslint/js/tar.gz/b6c8b31e33fcfe0d40742ca476b753c6aad9af8a: true
 minimumReleaseAgeExclude:
   - '@storybook/addon-svelte-csf@5.1.3'
